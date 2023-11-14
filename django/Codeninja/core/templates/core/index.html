@@ -1,0 +1,82 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% if form.errors %}
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+            {{ field|title }}: {{ error }}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+{% comment %} # ==> Relacion de herencia <== # {% endcomment %}
+{% comment %} # ==> Utilizacion de archivo statico 'styles.css' <== # {% endcomment %}
+{% block title %}👨‍💻 Codeninja 👩‍💻{% endblock %}
+{% block content %}
+<main>
+    <section>
+        <article class="subinicio">
+            <h1>¡Somos un grupo de diseño web!</h1>
+            <p class="line-two">Trabajamos ofreciéndote servicios de calidad y valor para tus emprendimientos
+                digitales.</p>
+            <span>Crecer juntos es nuestra meta.</span>
+        </article>
+    </section>   
+    <section>
+        {% block service %}
+        {% endblock%}
+    </section> 
+    <section>
+        {% block project %}
+        {% endblock%}
+    </section> 
+    <!-- Siguiente Section contiene consigna transformación del TPO  -->
+    <section>
+        <div id="nosotro" id="we">
+            <p><strong>Quiénes somos</strong></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit iusto quas est asperiores
+                consequuntur expedita et, neque dignissimos vitae animi adipisci blanditiis dolorem modi molestiae,
+                nemo laboriosam, temporibus eum ipsam</p>
+        </div>
+    </section>
+    <section class="frame">
+        <form method="post" action="" id="form" class='warnings'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit" onclick="enviarMail()">Enviar</button>
+        </form>
+        {% comment %} <form action="https://formsubmit.co/equipo.codeninja@gmail.com" method="POST" id="form">
+            <input type="text" name="name" id="name" class="name" placeholder="Nombre y Apellido">
+            <label for=""></label>
+            <input type="email" name="email" id="email" placeholder="Email" class="email">
+            <label for=""></label>
+            <textarea name="comments" id="consulta" class="consulta" placeholder="Consúltanos"></textarea>
+            <label for=""></label>
+            <button class="button" type="submit" onclick="enviarMail()">Enviar</button>
+            <p class="warnings" id="warnings"></p>
+            <input type="hidden" name="_next" value="https://codeninja-codoacodo.netlify.app/">
+            <input type="hidden" name="_captcha" value="false">
+        </form> {% endcomment %}
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.0577494193294!2d-58.369118484430516!3d-34.602701180459775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a335320d9ea4c5%3A0x2cb41df4e2abe065!2sGoogle!5e0!3m2!1ses-419!2sar!4v1661904974303!5m2!1ses-419!2sar"
+            title="Google Arg" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+    <!-- API rest: https://jsonplaceholder.typicode.com/users -->
+    <section>
+        <div id="representar"><strong>Nuestros representantes</strong></div>
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th><strong>Nombre</strong></th>
+                    <th><strong>Email</strong></th>
+                </tr>
+            </thead>
+            <tbody id="respuesta">
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+{% endblock %}

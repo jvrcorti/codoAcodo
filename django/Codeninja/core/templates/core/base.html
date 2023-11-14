@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=firefox">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Javier Corti">
+    <meta name="description" content="Web site created by Javier">
+    <link rel="shortcut icon" href="icon/rust.png" type="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+    {% comment %} Directorio del estilo CSS en formato django {% endcomment %}
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    <!-- Complementos para el envio de email -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <!-- <script type="text/javascript">
+        (function(){
+            emailjs.init("bDP4wAfrljutc27Hv");
+        })();
+    </script> -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    {% comment %} {% block title %}{% endblock %} {% endcomment %}
+    <title>👨‍💻 Codeninja 👩‍💻</title>
+</head>
+
+<body>
+    <header>
+        <nav id="inicio" class="navbar">
+            <div class="brand-title"><img src="icon/codeninja-logo.svg" alt="logo"></div>
+            <button class="toggle-button" id="toggle-button"><i id="toggle-icon"
+                    class="fa-solid fa-desktop"></i></button>
+            <ul class="navbar-links">
+                <li>
+                    <a alt="Inicio" href={% url 'index' %}>Inicio</a>
+                </li> 
+                <li><a alt="Servicios" href={% url 'servicios' %}>Servicios</a></li>
+                <li><a alt="Proyectos" href={% url "proyectos" %}>Proyectos</a></li>
+                <li><a alt="Nosotros" href="#nosotro">Nosotros</a></li>
+                <li><a alt="Contacto" href="#form">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %} 
+    {% endblock %}
+    <footer>
+        <p>&copy; Copyright by Codeninja. All right reserverd.</p>
+        <a id="gitlab" href="https://github.com/jvrcorti/codo_a_codo" target="_blank">
+            <p><i class="fa-brands fa-square-github"></i></p>
+        </a>
+        <!-- Siguiente enlace contiene transición logo de whatsapp -->
+        <a class="btn-wtp" title="Contáctenos" href="#" onclick="sendWpp()" target="" alt="Contáctenos"><img
+                src="icon/whatsapp.ico"></a>
+    </footer>
+    <!-- <script src="scripts.js"></script> -->
+    <script src="{% static 'core/validar.js' %}"></script>
+    <script src="{% static 'core/apiget.js' %}"></script>
+    <script src="{% static 'core/navScript.js' %}"></script>
+</body>
+</html>
