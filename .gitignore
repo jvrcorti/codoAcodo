@@ -1,5 +1,7 @@
 django\Apuntes\*
 django\Codeninja\db.sqlite3
+django\Codeninja\.env
 django\Codeninja\Codeninja\__pycache__\*
 django\Codeninja\core\__pycache__\*
+django\Codeninja\core\migrations\*
 django\Pig23654-Grupo18\*

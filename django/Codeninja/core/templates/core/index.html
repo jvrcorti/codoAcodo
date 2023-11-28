@@ -7,14 +7,14 @@
         {% endfor %}
     {% endfor %}
 {% endif %}
-{% comment %} # ==> Relacion de herencia <== # {% endcomment %}
+{% comment %} # ==> Relacion de herencia: core/base.html <== # {% endcomment %}
 {% comment %} # ==> Utilizacion de archivo statico 'styles.css' <== # {% endcomment %}
 {% block title %}👨‍💻 Codeninja 👩‍💻{% endblock %}
 {% block content %}
 <main>
     <section>
         <article class="subinicio">
-            <h1>¡Somos un grupo de diseño web!</h1>
+            <h1>¡Somos un grupo de diseño web! {{ fecha_actual|time }}</h1>
             <p class="line-two">Trabajamos ofreciéndote servicios de calidad y valor para tus emprendimientos
                 digitales.</p>
             <span>Crecer juntos es nuestra meta.</span>
@@ -31,10 +31,8 @@
     <!-- Siguiente Section contiene consigna transformación del TPO  -->
     <section>
         <div id="nosotro" id="we">
-            <p><strong>Quiénes somos</strong></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit iusto quas est asperiores
-                consequuntur expedita et, neque dignissimos vitae animi adipisci blanditiis dolorem modi molestiae,
-                nemo laboriosam, temporibus eum ipsam</p>
+            <strong>Quiénes somos</strong>
+            {% lorem 5 p %}
         </div>
     </section>
     <section class="frame">

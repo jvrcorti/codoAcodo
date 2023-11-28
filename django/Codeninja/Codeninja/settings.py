@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,11 +74,15 @@ WSGI_APPLICATION = 'Codeninja.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# Base de datos postgresQL creado con pgadmin. Nombre:codeninjaDB
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config('DB_ENGINE'),  # 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),  # 'postgres',
+        'USER': config('DB_USER'),  # 'postgres',
+        'PASSWORD': config('DB_PASSWORD'),  # '1234',
+        'HOST': config('DB_HOST'),  # '127.0.0.1',
+        'PORT': config('DB_PORT'),  # '5432',
     }
 }
 

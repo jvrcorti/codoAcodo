@@ -46,7 +46,7 @@
     {% block content %} 
     {% endblock %}
     <footer>
-        <p>&copy; Copyright by Codeninja. All right reserverd.</p>
+        <p>&copy; {% now 'Y' %} Copyright by Codeninja. All right reserverd.</p>
         <a id="gitlab" href="https://github.com/jvrcorti/codo_a_codo" target="_blank">
             <p><i class="fa-brands fa-square-github"></i></p>
         </a>
@@ -55,7 +55,7 @@
                 src="icon/whatsapp.ico"></a>
     </footer>
     <!-- <script src="scripts.js"></script> -->
-    <script src="{% static 'core/validar.js' %}"></script>
+    {% comment %} <script src="{% static 'core/validar.js' %}"></script> {% endcomment %}
     <script src="{% static 'core/apiget.js' %}"></script>
     <script src="{% static 'core/navScript.js' %}"></script>
 </body>
