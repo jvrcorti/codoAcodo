@@ -75,6 +75,7 @@ WSGI_APPLICATION = 'Codeninja.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 # Base de datos postgresQL creado con pgadmin. Nombre:codeninjaDB
+# Utilizando un enviroment para la config de la DB
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),  # 'django.db.backends.postgresql',
@@ -105,6 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODE = 'authentication.CustomUsuario'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -127,3 +132,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'servicios'
+LOGOUT_REDIRECT_URL = 'index'

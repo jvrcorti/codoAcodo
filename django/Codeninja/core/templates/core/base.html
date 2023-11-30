@@ -40,6 +40,12 @@
                 <li><a alt="Proyectos" href={% url "proyectos" %}>Proyectos</a></li>
                 <li><a alt="Nosotros" href="#nosotro">Nosotros</a></li>
                 <li><a alt="Contacto" href="#form">Contacto</a></li>
+                {% if not user.is_authenticaded %}
+                    <li><a alt="Login" href={% url 'login' %}>Login</a></li>
+                {% else %}
+                    <p> Bienvenido {{user.username}}</p>
+                    <a href="{% url 'logout' %}">Salir</a>
+                {% endif%}
             </ul>
         </nav>
     </header>
@@ -47,7 +53,7 @@
     {% endblock %}
     <footer>
         <p>&copy; {% now 'Y' %} Copyright by Codeninja. All right reserverd.</p>
-        <a id="gitlab" href="https://github.com/jvrcorti/codo_a_codo" target="_blank">
+        <a id="gitlab" href="https://github.com/jvrcorti/codoAcodo/tree/main/django/Codeninja" target="_blank">
             <p><i class="fa-brands fa-square-github"></i></p>
         </a>
         <!-- Siguiente enlace contiene transición logo de whatsapp -->

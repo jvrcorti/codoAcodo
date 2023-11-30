@@ -30,8 +30,13 @@
     </section> 
     <!-- Siguiente Section contiene consigna transformación del TPO  -->
     <section>
-        <div id="nosotro" id="we">
-            <strong>Quiénes somos</strong>
+        <div id="nosotro" id="we"> 
+            <strong>
+    {% comment %} ==> Filtro colocado <== {% endcomment %}
+            {% filter force_escape|upper %}
+                Quiénes somos  
+            {% endfilter %}
+            </strong>
             {% lorem 5 p %}
         </div>
     </section>
