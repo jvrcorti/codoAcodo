@@ -40,11 +40,20 @@
                 <li><a alt="Proyectos" href={% url "proyectos" %}>Proyectos</a></li>
                 <li><a alt="Nosotros" href="#nosotro">Nosotros</a></li>
                 <li><a alt="Contacto" href="#form">Contacto</a></li>
+                {% if message %}
+                    <div class='alert alert-danger'>
+                        {% for message in messages %} 
+                            {{message}}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 {% if not user.is_authenticaded %}
-                    <li><a alt="Login" href={% url 'login' %}>Login</a></li>
+                    <li><a alt="Acceder" href={% url 'login' %}>Acceder</a></li>
                 {% else %}
-                    <p> Bienvenido {{user.username}}</p>
-                    <a href="{% url 'logout' %}">Salir</a>
+                    <li>
+                        <p> Bienvenido, {{user.username}} </p>
+                        <a alt="Salir" href={% url 'logout' %}>Salir</a>
+                    </li>
                 {% endif%}
             </ul>
         </nav>

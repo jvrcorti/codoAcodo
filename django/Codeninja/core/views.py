@@ -1,3 +1,4 @@
+from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
@@ -9,13 +10,19 @@ from django.views.generic.edit import CreateView
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
 from .forms import ContactoForms
-from .models import Service
+from .models import Service, MiConsulta
 import datetime
 
 
 class PaginaLoginView(LoginView):
     template_name = 'core/login.html'
     success_url = reverse_lazy('core/servicios.html')
+
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        messages.error(
+            self.request, form.error_messages['Sos  boludo. Pone bien la contraseña'])
+        return response
 
 
 class CustomUsuarioView(CreateView):
@@ -24,15 +31,17 @@ class CustomUsuarioView(CreateView):
     success_url = reverse_lazy('core/login.html')
 
 # ==> Formulario asociado a template y basado en clase a través forms.py <== #
+# ==> Validacón del backend. Para ver debe estar autenticado <==
 
 
 @login_required
 def index(request):
-    form = ContactoForms(request.POST)
-    if form.is_valid():
-        consulta = form.save()
-        print(form.cleaned_data)
-        return redirect('index')
+    if request.method == 'POST':
+        form = ContactoForms(request.POST)
+        if form.is_valid():
+            consulta = form.save()
+            print(form.cleaned_data)
+            return redirect('index')
     else:
         form = ContactoForms()
 
@@ -57,3 +66,8 @@ def servicios_detail(request, servicio_id):
 
 def proyectos(request):
     return render(request, 'core/proyectos.html')
+
+
+def mostrar_consulta(request):
+    datos = MiConsulta.objects.all()
+    return render(request, 'login.html', {'datos': datos})

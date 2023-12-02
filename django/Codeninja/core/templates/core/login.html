@@ -2,6 +2,13 @@
 {% load static %}
 {% block content %}
   <h2>Iniciar Sesión</h2>
+  {% if message %}
+      <div class='alert alert-danger'>
+          {% for message in messages %} 
+              {{message}}
+          {% endfor %}
+      </div>
+  {% endif %}
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     {{ form.as_p }}

@@ -1,7 +1,19 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import AuthenticationForm
 from .models import MiConsulta, Service
 import re
+
+
+class UserAuthenticationForm(AuthenticationForm):
+    error_massages = {
+        'invalid_login': 'Sos boludo, logueate bien querés',
+        'inactive': 'Esta cuenta está inactiva',
+    }
+    username = forms.CharField(
+        label='Nombre de usuario',
+        widget=forms.TextInput(attrs={'autofocus': True}),
+    )
 
 # ==> Formulario basado en clase <==
 
@@ -18,8 +30,8 @@ class ContactoForms(forms.ModelForm):
         consulta = forms.CharField(label='Consúltanos', required=True, widget=forms.Textarea(
             attrs={'placeholder': 'Ingrese su consulta', 'class': 'consulta'})),
 
-    relacion_servicios = forms.ModelMultipleChoiceField(
-        queryset=Service.objects.all(), widget=forms.CheckboxSelectMultiple)
+        relacion_servicio = forms.ModelMultipleChoiceField(
+            queryset=Service.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     # ==> Realiza validacion sobre los campos del formulario, todos son obligatorios <== #
 
@@ -35,7 +47,6 @@ class ContactoForms(forms.ModelForm):
         return name
 
     def clean_email(self):
-        cleaned_data = super().clean()
         email = self.cleaned_data.get('email')
         if not forms.EmailField:
             raise forms.ValidationError('Ingrese su email de contacto')
@@ -47,7 +58,7 @@ class ContactoForms(forms.ModelForm):
 
     def clean_consulta(self):
         consulta = self.cleaned_data.get('consulta')
-        if len(consulta) < 10:
+        if len(consulta.strip()) < 10:  # strip(): quita los espacios del principio y final
             raise forms.ValidationError(
                 'Ingrese su consulta sobre nuestros servicios.')
         return consulta
